@@ -16,6 +16,13 @@ class PyJupyterlab(PythonPackage):
 
     license("BSD-3-Clause")
 
+    version("4.3.1", sha256="a4a338327556443521731d82f2a6ccf926df478914ca029616621704d47c3c65")
+    version("4.3.0", sha256="7c6835cbf8df0af0ec8a39332e85ff11693fb9a468205343b4fc0bfbc74817e5")
+    version("4.2.6", sha256="625f3ac19da91f9706baf66df25723b2f1307c1159fc7293035b066786d62a4a")
+    version("4.2.0", sha256="356e9205a6a2ab689c47c8fe4919dba6c076e376d03f26baadc05748c2435dd5")
+    version("4.1.8", sha256="3384aded8680e7ce504fd63b8bb89a39df21c9c7694d9e7dc4a68742cdb30f9b")
+    version("4.1.0", sha256="92cdfd86c53e163fb9e91e14497901153536c5a889c9225dade270f6107a077f")
+    version("4.0.13", sha256="e8950f94e0d8ab8aa7d8166b19db27f4d4fea5000ee04ba372c50116e98fb733")
     version("4.0.1", sha256="4dc3901f7bbfd4704c994b7a893a49955256abf57dba9831f4825e3f3165b8bb")
     version("3.4.8", sha256="1fafb8b657005d91603f3c3adfd6d9e8eaf33fdc601537fef09283332efe67cb")
     version("3.4.2", sha256="38abd3a4f83a8f97e3f15bebbcc0825903c15519809eedfaa41340d260be2160")
@@ -34,23 +41,31 @@ class PyJupyterlab(PythonPackage):
     depends_on("npm", type="run")
 
     depends_on("python@3.8:", when="@4:", type=("build", "run"))
-    depends_on("py-hatchling@1.5:", when="@4:", type=("build", "run"))
+    depends_on("py-hatchling@1.21.1:", when="@4.1:", type=("build"))
+    depends_on("py-hatchling@1.5:", when="@4:", type=("build"))
     # under [tool.hatch.build.hooks.jupyter-builder] in pyproject.toml
     depends_on("py-hatch-jupyter-builder@0.3.2:", when="@4:", type=("build", "run"))
 
     depends_on("py-async-lru@1:", when="@4:", type=("build", "run"))
+    # For httpx~=0.28.0 see https://github.com/jupyterlab/jupyterlab/pull/17041
+    depends_on("py-httpx@0.28.0:0.28", when="@4.3.2", type=("build", "run"))
+    depends_on("py-httpx@0.25:", when="@4.1:", type=("build", "run"))
     depends_on("py-importlib-metadata@4.8.3:", when="@4: ^python@:3.9", type=("build", "run"))
     depends_on("py-importlib-resources@1.4:", when="@4: ^python@:3.8", type=("build", "run"))
+    depends_on("py-ipykernel@6.5:", when="@4.1.6:", type=("build", "run"))
     depends_on("py-ipykernel", when="@4:", type=("build", "run"))
     depends_on("py-jinja2@3.0.3:", when="@4:", type=("build", "run"))
     depends_on("py-jupyter-core", when="@3:", type=("build", "run"))
     depends_on("py-jupyter-lsp@2:", when="@4:", type=("build", "run"))
     depends_on("py-jupyter-server@2.4:2", when="@4:", type=("build", "run"))
+    depends_on("py-jupyterlab-server@2.27.1:2", when="@4.1.7:", type=("build", "run"))
     depends_on("py-jupyterlab-server@2.19:2", when="@4:", type=("build", "run"))
     depends_on("py-notebook-shim@0.2:", when="@4:", type=("build", "run"))
     depends_on("py-packaging", when="@3:", type=("build", "run"))
+    depends_on("py-setuptools@40.1:", when="@4.2.2:", type=("build", "run"))
     depends_on("py-traitlets", when="@4:", type=("build", "run"))
     depends_on("py-tornado@6.2:", when="@4:", type=("build", "run"))
+    depends_on("py-tomli@1.2.2:", when="@4.1.6: ^python@:3.10", type=("build", "run"))
     depends_on("py-tomli", when="@3.4.7: ^python@:3.10", type=("build", "run"))
 
     with when("@:3"):
